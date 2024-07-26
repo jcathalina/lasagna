@@ -1,11 +1,11 @@
 #+-----------------------------------------+
-#|           Imagem Spark 3.5.0            | 
+#|           Imagem Spark 3.5.1            | 
 #|                                         |
 #| O que decide se é Driver ou Worker      |
 #| é o comando de inicialização no compose |
 #+-----------------------------------------+
 
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 SHELL ["/bin/bash", "-c"]
 
