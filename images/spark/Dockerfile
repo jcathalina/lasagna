@@ -17,6 +17,20 @@ RUN apt-get update --fix-missing
 
 RUN apt-get install curl -y
 
+#+------------------+
+#| Install DS deps. |
+#+------------------+
+
+RUN apt-get install python3-pip -y --fix-missing
+RUN pip install pyarrow==16.1.0 \
+                pandas \
+                xgboost \
+                scikit-learn \
+                matplotlib \
+                seaborn \
+                plotly \
+                catboost
+
 #+--------------------+
 #| Instalando Java 11 |
 #+--------------------+
