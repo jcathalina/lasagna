@@ -1,5 +1,5 @@
 #+-----------------------------------------+
-#|           Imagem Spark 3.5.1            | 
+#|           Imagem Spark 3.5.5            | 
 #|                                         |
 #| O que decide se é Driver ou Worker      |
 #| é o comando de inicialização no compose |
@@ -23,13 +23,13 @@ RUN apt-get install curl -y
 
 RUN apt-get install python3-pip -y --fix-missing
 RUN pip install pyarrow==16.1.0 \
-                pandas \
-                xgboost \
-                scikit-learn \
-                matplotlib \
-                seaborn \
-                plotly \
-                catboost
+    pandas \
+    xgboost \
+    scikit-learn \
+    matplotlib \
+    seaborn \
+    plotly \
+    ray[default,data,train,tune]==2.43.0
 
 #+--------------------+
 #| Instalando Java 11 |
@@ -42,15 +42,15 @@ RUN apt-get install openjdk-11-jdk -y                                           
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH "${JAVA_HOME}/bin:$PATH"
 
- #+------------------------+
- #| Instalando Spark 3.5.1 |
- #+------------------------+
+#+------------------------+
+#| Instalando Spark 3.5.5 |
+#+------------------------+
 
-RUN curl -O https://dlcdn.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz &&\
-    tar zxvf spark-3.5.1-bin-hadoop3.tgz -C /usr/local &&\
-    rm spark-3.5.1-bin-hadoop3.tgz &&\
+RUN curl -O https://dlcdn.apache.org/spark/spark-3.5.5/spark-3.5.5-bin-hadoop3.tgz &&\
+    tar zxvf spark-3.5.5-bin-hadoop3.tgz -C /usr/local &&\
+    rm spark-3.5.5-bin-hadoop3.tgz &&\
     cd /usr/local &&\
-    ln -sT spark-3.5.1-bin-hadoop3 spark
+    ln -sT spark-3.5.5-bin-hadoop3 spark
 
 RUN echo "export SPARK_HOME=/usr/local/spark" >> ~/.bashrc
 RUN echo "export PATH=\$SPARK_HOME/bin:\$PATH" >> ~/.bashrc
@@ -70,7 +70,7 @@ RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.2
 
 RUN curl https://jdbc.postgresql.org/download/postgresql-42.5.0.jar \
     --output ${SPARK_HOME}/jars/postgresql-42.5.0.jar
-    
+
 #+---------------------------------------------+
 #| Instalando dependências para Apache Iceberg |
 #+---------------------------------------------+
